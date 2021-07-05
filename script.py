@@ -1,5 +1,6 @@
 import os
 import base64
+import random
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
@@ -30,7 +31,9 @@ def TermPrompt():
         NewAlgorithmKey()
     if Response in ('BINARY','Binary','binary','B','b'):
         Binary()
-    if Response not in ('ENCRYPT','encrypt','Encrypt','E','e','DECRYPT','decrypt','Decrypt','D','d','HASHSWAP','hashswap','HashSwap','HS','hs','Hs','hS','KEYRING','keyring','Keyring','KR','kr','Kr','NEWPASS','newpass','NewPass','NP','np','Np','nP','SECUREFORSTORAGE','SecureForStorage','secureforstorage','SFS','Sfs','SfS','sfS','sFs','sfs','ALGORITHM','Algorithm','algorithm','A','a','NEWSALT','NewSalt','newsalt','NS','Ns','nS','ns','NEWALGORITHM','NewAlgorithm','newalgorithm','NA','Na','nA','na','BINARY','Binary','binary','B','b'):
+    if Response in ('RGPASSPHRASE','rgPASSPHRASE','RgPASSPHRASE','rGPASSPHRASE','RGpassphrase','rgpassphrase','Rgpassphrase','rGpassphrase','RGPassPhrase','rgpPassPhrase','RgPassPhrase','rGPassPhrase',):
+        RandomlyGeneratedPassPhrase()
+    if Response not in ('ENCRYPT','encrypt','Encrypt','E','e','DECRYPT','decrypt','Decrypt','D','d','HASHSWAP','hashswap','HashSwap','HS','hs','Hs','hS','KEYRING','keyring','Keyring','KR','kr','Kr','NEWPASS','newpass','NewPass','NP','np','Np','nP','SECUREFORSTORAGE','SecureForStorage','secureforstorage','SFS','Sfs','SfS','sfS','sFs','sfs','ALGORITHM','Algorithm','algorithm','A','a','NEWSALT','NewSalt','newsalt','NS','Ns','nS','ns','NEWALGORITHM','NewAlgorithm','newalgorithm','NA','Na','nA','na','BINARY','Binary','binary','B','b','RGPASSPHRASE','rgPASSPHRASE','RgPASSPHRASE','rGPASSPHRASE','RGpassphrase','rgpassphrase','Rgpassphrase','rGpassphrase','RGPassPhrase','rgpPassPhrase','RgPassPhrase','rGPassPhrase'):
         return TermPrompt()
 
 
@@ -282,6 +285,97 @@ Type Here : ''')
         DecodedString = DecodeBinaryString(BinaryString)
 # prints to user
         print(DecodedString)
+
+
+
+# Creates Random Iterations of PassPhrases
+def RGPass():
+    b = open('dictionary.py').read().splitlines()
+    n1 = random.choice(range(1,370000))#int(input('Number 1 : '))
+    n2 = random.choice(range(1,370000))#int(input('Number 2 : '))
+    n3 = random.choice(range(1,370000))#int(input('Number 3 : '))
+    n4 = random.choice(range(1,370000))#int(input('Number 4 : '))
+    n5 = random.choice(range(1,370000))#int(input('Number 5 : '))
+    n6 = random.choice(range(1,370000))#int(input('Number 6 : '))
+    n7 = random.choice(range(1,370000))#int(input('Number 7 : '))
+    n8 = random.choice(range(1,370000))#int(input('Number 8 : '))
+    n9 = random.choice(range(1,370000))#int(input('Number 9 : '))
+    x = [n1, n2, n3, n4, n5, n6, n7, n8, n9]
+    s = '#'
+    z = []
+    for index in x:
+        z.append(b[index])
+    y = '#'.join(z)
+    v = str(y.replace("'",''))
+    h = v.split(s)
+    o = '24#68%975@31'
+    r = o.join(h)
+    file = open('PPG.key', 'a')
+    file.write('''
+''' + r + 
+'''
+''')
+    file.close()
+def RGPass1():
+    RGPass()
+def RGPass2():
+    RGPass()
+    RGPass()
+def RGPass5():
+    RGPass2()
+    RGPass2()
+    RGPass1()
+def RGPass10():
+    RGPass5()
+    RGPass5()
+def RGPass15():
+    RGPass10()
+    RGPass5()
+def RGPass20():
+    RGPass10()
+    RGPass10()
+def RGPass50():
+    RGPass10()
+    RGPass10()
+    RGPass10()
+    RGPass10()
+    RGPass10()
+def RGPass100():
+    RGPass50()
+    RGPass50()
+def RandomlyGeneratedPassPhrase():
+    he = input('''How Many Iterations ? 
+Type Here : ''')
+    if he not in ('1','2','10','15','20','50','100'):
+        print('Please Use Listed Numbers Only')
+    if he in ('1'):
+        print(RGPass1())
+        return print(he + ' iterations logged successfully')
+    if he in ('2'):
+        print(RGPass2())
+        return print(he + ' iterations logged successfully')
+    if he in ('5'):
+        print(RGPass2())
+        print(RGPass2())
+        print(RGPass1())
+        return print(he + ' iterations logged successfully')
+    if he in ('10'):
+        print(RGPass10())
+        return print(he + ' iterations logged successfully')
+    if he in ('15'):
+        print(RGPass15())
+        return print(he + ' iterations logged successfully')
+    if he in ('20'):
+        print(RGPass20())
+        return print(he + ' iterations logged successfully')
+    if he in ('50'):
+        print(RGPass50())
+        return print(he + ' iterations logged successfully')
+    if he in ('100'):
+        print(RGPass100())
+        return print(he + ' iterations logged successfully')
+    if he not in ('1','2','10','15','20','50','100'):
+        return print('Please Use Listed Numbers Only')
 
 
 
