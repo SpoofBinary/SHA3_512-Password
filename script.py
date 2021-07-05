@@ -149,8 +149,20 @@ def Keyring():
     TotalKeys = file.read()
     file.close()
 # prints Total Keys to User
-    print(TotalKeys)
+    ans = input(TotalKeys + '''
+    Currently Stowed Keys Have Been Listed Above
+    Would You Like To Store Another One ? 
+    Type Here : ''')
+    if ans in ('YES','Yes','yes','Y','y'):
+        NewHashKey = input('''Enter The Key You Would Like To Stow
+        Type Here : ''')
+        file = open('keyring.keys', 'w')
+        file.write(TotalKeys + '''
 
+''' + NewHashKey)
+        file.close()
+    if ans in ('NO','No','no','N','n'):
+        print('')
 
 
 def SecureForStorage():
