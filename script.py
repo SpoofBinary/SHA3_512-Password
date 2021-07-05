@@ -8,7 +8,7 @@ from cryptography.fernet import Fernet
 
 
 def TermPrompt():
-    Response = input('''new pass | new salt | new algorithm | encrypt | decrypt | hashswap | keyring | !SecureForStorage!
+    Response = input('''New Pass | New Salt | New Algorithm | Encrypt | Decrypt | HashSwap | KeyRing | Binary | !SecureForStorage!
     Type Here : ''')
     if Response in ('ALGORITHM','Algorithm','algorithm','A','a'):
         Algorithm()
@@ -28,7 +28,9 @@ def TermPrompt():
         NewSalt()
     if Response in ('NEWALGORITHM','NewAlgorithm','newalgorithm','NA','Na','nA','na'):
         NewAlgorithmKey()
-    if Response not in ('ENCRYPT','encrypt','Encrypt','E','e','DECRYPT','decrypt','Decrypt','D','d','HASHSWAP','hashswap','HashSwap','HS','hs','Hs','hS','KEYRING','keyring','Keyring','KR','kr','Kr','NEWPASS','newpass','NewPass','NP','np','Np','nP','SECUREFORSTORAGE','SecureForStorage','secureforstorage','SFS','Sfs','SfS','sfS','sFs','sfs','ALGORITHM','Algorithm','algorithm','A','a','NEWSALT','NewSalt','newsalt','NS','Ns','nS','ns','NEWALGORITHM','NewAlgorithm','newalgorithm','NA','Na','nA','na'):
+    if Response in ('BINARY','Binary','binary','B','b'):
+        Binary()
+    if Response not in ('ENCRYPT','encrypt','Encrypt','E','e','DECRYPT','decrypt','Decrypt','D','d','HASHSWAP','hashswap','HashSwap','HS','hs','Hs','hS','KEYRING','keyring','Keyring','KR','kr','Kr','NEWPASS','newpass','NewPass','NP','np','Np','nP','SECUREFORSTORAGE','SecureForStorage','secureforstorage','SFS','Sfs','SfS','sfS','sFs','sfs','ALGORITHM','Algorithm','algorithm','A','a','NEWSALT','NewSalt','newsalt','NS','Ns','nS','ns','NEWALGORITHM','NewAlgorithm','newalgorithm','NA','Na','nA','na','BINARY','Binary','binary','B','b'):
         return TermPrompt()
 
 
@@ -183,6 +185,9 @@ def SecureForStorage():
         file = open('oldpassword.key', 'w')
         file.write(RedKeyCleaner)
         file.close()
+        file = open('binaryhash.key', 'w')
+        file.write(RedKeyCleaner)
+        file.close()
 # Fetches Data to Confirm Clean Slate Presence
         file = open('password.key', 'r')
         password = file.read()
@@ -190,7 +195,10 @@ def SecureForStorage():
         file = open('oldpassword.key', 'r')
         oldpassword = file.read()
         file.close()
-        print('''If Successful This Box Will Be Blank | ''' + password + oldpassword + ''' | ''')
+        file = open('binaryhash.key', 'r')
+        binaryhash = file.read()
+        file.close()
+        print('''If Successful This Box Will Be Blank | ''' + password + oldpassword + binaryhash + ''' | ''')
         KeyEncryption()
     if ans not in ('YES','Yes','yes','Y','y'):
         return TermPrompt()
@@ -230,6 +238,50 @@ def NewAlgorithmKey():
     file = open('encryptor.key', 'w')
     file.write(NewPhrase)
     file.close()
+
+
+
+def remove_spaces(str1):
+    str1 = str1.replace(' ', '')
+    return str1
+
+
+
+def DecodeBinaryString(s):
+    return ''.join(chr(int(s[i*8:i*8+8],2)) for i in range(len(s)//8))
+
+
+
+def Binary():
+    ans = input('''Encrypt | Decrypt
+    Type Here : ''')
+# Encrypt Option
+    if ans in ('ENCRYPT','Encrypt','encrypt','E','e'):
+        String = input('''Please Input Binary String
+Type Here : ''')
+# encrypts string into binary format
+        BinaryHash = ' '.join(format(ord(i), '08b') for i in String)
+# Reverse binary hash for secure storage
+        BHReversed = BinaryHash[::-1]
+# writes binary to file
+        file = open('binaryhash.key', 'w')
+        file.write(BHReversed)
+        file.close()
+        print(BHReversed)
+# decrypts binary into string format
+    if ans in ('DECRYPT','Decrypt','decrypt','D','d'):
+# fetches for Reversed Binary in binaryhash.key
+        file = open('binaryhash.key', 'r')
+        BinaryDecryptReversed = file.read()
+        file.close()
+# Unreverses reversed binary from secured storage
+        BinaryNormal = BinaryDecryptReversed[::-1]
+# removes spacaes for binary decoding
+        BinaryString = remove_spaces(BinaryNormal)
+# decodes binary to string
+        DecodedString = DecodeBinaryString(BinaryString)
+# prints to user
+        print(DecodedString)
 
 
 
