@@ -9,7 +9,7 @@ from cryptography.fernet import Fernet
 
 
 def TermPrompt():
-    Response = input('''New Pass | New Salt | New Algorithm | Encrypt | Decrypt | HashSwap | KeyRing | Binary | !SecureForStorage!
+    Response = input('''RGPassphrase | New Pass | New Salt | New Algorithm | Encrypt | Decrypt | HashSwap | KeyRing | Binary | !SecureForStorage!
     Type Here : ''')
     if Response in ('ALGORITHM','Algorithm','algorithm','A','a'):
         Algorithm()
