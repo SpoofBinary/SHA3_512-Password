@@ -291,15 +291,15 @@ Type Here : ''')
 # Creates Random Iterations of PassPhrases
 def RGPass():
     b = open('dictionary.py').read().splitlines()
-    n1 = random.choice(range(1,370000))#int(input('Number 1 : '))
-    n2 = random.choice(range(1,370000))#int(input('Number 2 : '))
-    n3 = random.choice(range(1,370000))#int(input('Number 3 : '))
-    n4 = random.choice(range(1,370000))#int(input('Number 4 : '))
-    n5 = random.choice(range(1,370000))#int(input('Number 5 : '))
-    n6 = random.choice(range(1,370000))#int(input('Number 6 : '))
-    n7 = random.choice(range(1,370000))#int(input('Number 7 : '))
-    n8 = random.choice(range(1,370000))#int(input('Number 8 : '))
-    n9 = random.choice(range(1,370000))#int(input('Number 9 : '))
+    n1 = random.choice(range(1,370000))
+    n2 = random.choice(range(1,370000))
+    n3 = random.choice(range(1,370000))
+    n4 = random.choice(range(1,370000))
+    n5 = random.choice(range(1,370000))
+    n6 = random.choice(range(1,370000))
+    n7 = random.choice(range(1,370000))
+    n8 = random.choice(range(1,370000))
+    n9 = random.choice(range(1,370000))
     x = [n1, n2, n3, n4, n5, n6, n7, n8, n9]
     s = '#'
     z = []
