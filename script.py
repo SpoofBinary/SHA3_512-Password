@@ -9,10 +9,8 @@ from cryptography.fernet import Fernet
 
 
 def TermPrompt():
-    Response = input('''(FirstTime)Algorithm | RGPassphrase | New Pass | New Salt | New Algorithm | Encrypt | Decrypt | HashSwap | KeyRing | Binary | !SecureForStorage!
+    Response = input('''RGPassphrase | New Pass | New Salt | New Algorithm | Encrypt | Decrypt | HashSwap | KeyRing | Binary | !SecureForStorage!
     Type Here : ''')
-    if Response in ('ALGORITHM','Algorithm','algorithm','A','a'):
-        Algorithm()
     if Response in ('NEWPASS','newpass','NewPass','NP','np','Np','nP'):
         NewPassword()
     if Response in ('ENCRYPT','encrypt','Encrypt','E','e'):
@@ -35,37 +33,6 @@ def TermPrompt():
         RandomlyGeneratedPassPhrase()
     if Response not in ('ENCRYPT','encrypt','Encrypt','E','e','DECRYPT','decrypt','Decrypt','D','d','HASHSWAP','hashswap','HashSwap','HS','hs','Hs','hS','KEYRING','keyring','Keyring','KR','kr','Kr','NEWPASS','newpass','NewPass','NP','np','Np','nP','SECUREFORSTORAGE','SecureForStorage','secureforstorage','SFS','Sfs','SfS','sfS','sFs','sfs','ALGORITHM','Algorithm','algorithm','A','a','NEWSALT','NewSalt','newsalt','NS','Ns','nS','ns','NEWALGORITHM','NewAlgorithm','newalgorithm','NA','Na','nA','na','BINARY','Binary','binary','B','b','RGPASSPHRASE','rgPASSPHRASE','RgPASSPHRASE','rGPASSPHRASE','RGpassphrase','rgpassphrase','Rgpassphrase','rGpassphrase','RGPassPhrase','rgpPassPhrase','RgPassPhrase','rGPassPhrase'):
         return TermPrompt()
-
-
-
-def Algorithm():
-# grabs the encryptor string
-    file = open('encryptor.key')
-    encryptkey = file.read()
-    file.close()
-# sets the string for method of algorithmic encryption
-    encryptor = encryptkey
-# encoding and encrypting the string used to 
-    encoder = encryptor.encode()
-# grabs salt key
-    file = open('salt.key', 'rb')
-    saltkey = file.read()
-    file.close()
-# sets the salt for algorithm
-    salt = saltkey
-# Algorithm KDF configuration
-    kdf = PBKDF2HMAC(
-        algorithm=hashes.SHA3_512(),
-        length=32,
-        salt=salt,
-        iterations=1000000,
-        backend=default_backend()
-    )
-# sets algorithm key
-    key = base64.urlsafe_b64encode(kdf.derive(encoder))
-    file = open('algorithm.key', 'wb')
-    file.write(key)
-    file.close()
 
 
 
