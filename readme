@@ -1,0 +1,7 @@
+Install instructions
+
+sudo git clone https://github.com/SpoofBinary/SHA3_512-Password.git
+cd SHA3_512-Password
+python3 initialize.py
+python3 script.py
+
