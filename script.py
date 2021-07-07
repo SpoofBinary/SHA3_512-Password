@@ -116,14 +116,14 @@ def KeyEncryption():
 def KeyDecryption():
 # fetches key used to determine what algorithm was used
     file = open('algorithm.key', 'rb')
-    algorkey = file.read()
+    key = file.read()
     file.close()
 # fetches hashed password
     file = open('hash.key', 'rb')
     hashkey = file.read()
     file.close()
 # Decrypts and Decodes hash back into Original Password
-    f = Fernet(algorkey)
+    f = Fernet(key)
     decrypted = f.decrypt(hashkey)
     usablepass = decrypted.decode()
     print(usablepass)
